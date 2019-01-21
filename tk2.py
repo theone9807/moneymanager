@@ -1,4 +1,11 @@
+import tkinter as tk
 from tkinter import *
+from tkinter import messagebox
+
+
+
+from moneymanager import MoneyManager
+
 
 window = Tk()
 window.geometry("500x660") # size of the window width:- 500, height:- 375
@@ -21,20 +28,34 @@ pin_number_var = StringVar()
 pin_number_var.set('7890')
 
 #Modify the following to display a series of * rather than the pin ie **** not 1234
-user_pin_entry = Entry(window, textvariable=pin_number_var, show="*",width = 27,  background = 'white') .grid(row = 1, column = 1, padx = 1, pady = 1)
+user_pin_entry = Entry(window, textvariable=pin_number_var, show="*",width = 27,  background = 'white') .grid(row = 1, column = 0, padx = 1, pady = 1, sticky='e')
 #user_pin_entry.configure()
 
 
+# The Entry widget to accept a numerical value to deposit or withdraw
+#amount_var = tk.StringVar()
+tkVar=StringVar(window)
+amount_entry = tk.Entry(window)
+entry_type=tk.Entry(window)
+ 
+# The transaction text widget holds text of the transactions
+transaction_text_widget = tk.Text(window, height=10, width=48)
 
+# The money manager object we will work with
+user = MoneyManager() 
 
 
 ################################### functions ######################################
 # 'btn_click' function continuously updates the input field whenever you enters a number
 def btn_click(item):
     global expression
+    global expression1
     expression = expression + str(item)
-    input_text.set(expression)
-
+    expression1 = expression1 + str(item)
+   
+    user_number_var.set(expression1)
+    pin_number_var.set(expression)
+    
 # 'btn_clear' function clears the input field
 def btn_clear():
     global expression
@@ -50,19 +71,11 @@ def btn_equal():
     expression = ""
 
 expression = ""
+expression1 = ""
 # 'StringVar()' is used to get the instance of input field
 input_text = StringVar()
 
 
-# # creating a frame for the input field
-# input_frame = Frame(window, width = 250, height = 40, bd = 0, highlightbackground = "black", highlightcolor = "black", highlightthickness = 1)
-# input_frame.grid(row = 2)
-
-
-# # creating a input field inside the 'Frame'
-# input_field = Entry(input_frame, font = ('arial', 18, 'bold'), textvariable = input_text, width = 20, bg = "#eee", bd = 0, justify = RIGHT)
-# input_field.grid(row = 2, column = 0, ipady = 6)
- # 'ipady' is internal padding to increase the height of input field
 
 
 # creating another 'Frame' for the button below the 'input_frame'
@@ -70,9 +83,6 @@ btns_frame = Frame(window, width = 500, height = 660, bg = "grey")
 btns_frame.grid()
 
 
-# first row
-# clear = Button(btns_frame, text = "C", fg = "black", width = 32, height = 3, bd = 0, bg = "#eee", cursor = "hand2", command = lambda: btn_clear()).grid(row = 0, column = 0, columnspan = 3, padx = 1, pady = 1)
-# divide = Button(btns_frame, text = "/", fg = "black", width = 10, height = 3, bd = 0, bg = "#eee", cursor = "hand2", command = lambda: btn_click("/")).grid(row = 0, column = 3, padx = 1, pady = 1)
 
 
 # second row
@@ -94,7 +104,7 @@ three = Button(btns_frame, text = "3", fg = "black", width = 24, height = 7, bd 
 
 
 # fourth row
-cc = Button(btns_frame, text = "Cancel/Clear", fg = "black", width = 24, height = 7, bd = 0, bg = "red", cursor = "hand2", command = lambda: btn_click(0)).grid(row = 4, column = 0,  padx = 1, pady = 1)
+cc = Button(btns_frame, text = "Cancel/Clear", fg = "black", width = 24, height = 7, bd = 0, bg = "red", cursor = "hand2", command = lambda: btn_clear()).grid(row = 4, column = 0,  padx = 1, pady = 1)
 zero = Button(btns_frame, text = "0", fg = "black", width = 23, height = 7, bd = 0, bg = "#eee", cursor = "hand2", command = lambda: btn_click(".")).grid(row = 4, column = 1, padx = 1, pady = 1)
 equals = Button(btns_frame, text = "Log In", fg = "black", width = 24, height = 7, bd = 0, bg = "green", cursor = "hand2", command = lambda: btn_equal()).grid(row = 4, column = 2, padx = 1, pady = 1)
 

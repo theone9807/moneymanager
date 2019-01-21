@@ -24,7 +24,7 @@ class TestMoneyManager(unittest.TestCase):
         # raised.
         amount = 'bananas'
         expected = "Wrong input, Please provide correct input type!!!"
-        actual = MoneyManager.deposit_funds(amount)
+        actual = self.user.deposit_funds(amount)
         self.assertEqual(expected, actual, 'Exception R!!!')
 
     def test_legal_entry(self):
@@ -33,7 +33,7 @@ class TestMoneyManager(unittest.TestCase):
         entry = 'rent'
         amount = 50.0
         expected = 950.0
-        actual = MoneyManager.add_entry(self, amount, entry_type)
+        actual = self.user.add_entry(self, amount, entry)
         self.assertEqual(expected, actual, "failed")
         
 
@@ -43,7 +43,7 @@ class TestMoneyManager(unittest.TestCase):
         amount = 'bananas'
         entry = 'rent'
         expected = "Wrong input, Please provide correct input type!!!"
-        actual = MoneyManager.add_entry(self, amount, entry_type)
+        actual = MoneyManager.add_entry(self, amount, entry)
         self.assertEqual(expected, actual, "Error raised!!!")
 
         
@@ -53,7 +53,7 @@ class TestMoneyManager(unittest.TestCase):
         amount = 50.0
         entry = 'bananas'
         expected = "Wrong input, Please provide correct input type!!!"
-        actual = MoneyManager.add_entry(self, amount, entry_type)
+        actual = MoneyManager.add_entry(self, amount, entry)
         self.assertEqual(expected, actual, "Error raised!!!")
 
     def test_insufficient_funds_entry(self):
@@ -65,7 +65,7 @@ class TestMoneyManager(unittest.TestCase):
         amount = 1100.0
         entry = 'rent'
         expected = "Wrong input, Please provide correct input type!!!"
-        actual = MoneyManager.add_entry(self, amount, entry_type)
+        actual = MoneyManager.add_entry(self, amount, entry)
         self.assertEqual(expected, actual, "Insufficient Fund!!")
 
 # Run the unit tests in the above test case
